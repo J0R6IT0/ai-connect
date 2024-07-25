@@ -1,0 +1,1 @@
+A WIP attempt to connect different generative AI tools to create an interactive animated avatar. Codename ai-connect
