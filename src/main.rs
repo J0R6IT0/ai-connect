@@ -20,12 +20,16 @@ async fn main() {
 
     println!("pkill {}", output.status);
 
-    // Execute LocalAI from the home directory
     let home_path = dirs::home_dir().unwrap();
     let localai_path = home_path.join("local-ai");
-    let desktop_path = home_path.join("Desktop");
-    let audio_path = desktop_path.join("audio.wav");
 
+    let exe_path = std::env::current_exe().expect("Failed to get current exe path");
+    let temp_dir = exe_path.parent().unwrap().join("temp");
+    fs::create_dir_all(&temp_dir).expect("Failed to create temp folder");
+    let temp_path = temp_dir;
+    let audio_path = temp_path.join("audio.wav");
+
+    // Execute LocalAI from the home directory
     Command::new(localai_path)
         .spawn()
         .expect("Failed to start LocalAI");
@@ -48,7 +52,6 @@ async fn main() {
             .await
             .unwrap();
 
-        // Store audio file in desktop
         fs::write(&audio_path, audio_file).expect("Failed to write audio file");
 
         // Calculate execution time
