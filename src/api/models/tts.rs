@@ -4,7 +4,7 @@ use serde::Serialize;
 pub struct TTSPayload {
     pub input: String,
     pub model: String,
-    pub backend: TTSBackend
+    pub backend: TTSBackend,
 }
 
 #[derive(Serialize, Debug)]
